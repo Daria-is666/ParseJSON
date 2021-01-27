@@ -15,14 +15,22 @@ function readFile(input) {
      console.log(reader.error);
   };
 }
-  
-function setData({name,fields,references,button}){
+
+//body  
+function setData({name,fields,references,buttons}){
   document.body.insertAdjacentHTML('afterend', `
     <h1>${name}</h1>
     <div class="data">${setFields(fields)}</div>
+    <div id = "references" >${setButtons(references)}</div>
+    <div id = "buttons" >${setButtons(buttons)}</div>
   `)
+  if(references == undefined)
+      document.getElementById('references').remove();
+  if(buttons == undefined)
+      document.getElementById('buttons').remove();
 }
 
+//field
 function setFields(fields){
   return fields.map(
     (elem) => `
@@ -44,6 +52,28 @@ function setOtherInputParams(elem) {
   }
   if(elem.filetype != undefined){
      return `filetype = ${elem.filetype}`;
+  }
+}
+
+//references
+function setReferences(references) {
+  if(references != undefined){
+    return references.map(
+      (elem) => `
+      <a href="${elem.ref}" class="controlBtn">${elem.text}</a>
+      `);
+  }
+  
+}
+
+
+//buttons
+function setButtons(buttons) {
+  if(buttons != undefined){
+    return buttons.map(
+      (elem) => `
+      <a href="${elem.ref}" class="controlBtn">${elem.text}</a>
+      `);
   }
 }
   
