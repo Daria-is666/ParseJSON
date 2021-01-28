@@ -1,11 +1,85 @@
-
-.data
+ 
+ body
 {
+
+    width: 100%;
+
+    min-width: 1200px;
+   
+}
+.header
+{
+    margin: 0 auto;
+    text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+#name
+{
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFAD40;
+    
+}
+#fields
+{
+    margin: 0 auto;
+
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
     max-width: 200px;
 }
+#references
+{
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px;
+
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 200px;
+}
+#buttons
+{
+    margin: 0 auto;
+    text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+}
+
+label
+{
+    
+
+    font-size: 20px;
+    padding-bottom: 25px ;
+}
+input
+{
+margin-bottom: 10px;
+height: 25px;
+ 
+}
+
+a
+{
+    text-decoration: none;
+    display: inline-block;
+    color:black;
+    text-decoration: none;
+    padding: 6px 25px;
+    margin-bottom: 10px;
+    background-color: #8e918d;   
+
+    transition: color .5s linear;
+}
+
 
 .controlBtn
 {
@@ -13,3 +87,44 @@
     
     
 }
+
+@media (max-width: 767.98px) { 
+       
+    body
+    {
+        width: 100%;
+        max-width: 767.98px;
+    }
+    .header
+    {
+        width: 100%;
+        max-width: 767.98px;
+    }
+}
+
+@media (max-width: 575.98px) { 
+       
+    body
+    {
+        width: 100%;
+        max-width: 575.98px;
+    }
+    .header
+    {
+        width: 100%;
+        max-width: 767.98px;
+    }
+}
+@media (max-width: 975.98px) { 
+       
+    body
+    {
+        width: 100%;
+        max-width: 975.98px;
+    }
+    .header
+    {
+        width: 100%;
+        max-width: 767.98px;
+    }
+} 

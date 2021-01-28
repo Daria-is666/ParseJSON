@@ -1,3 +1,4 @@
+//загрузка
 function readFile(input) {
   let jsonFile;
   let file = input.files[0];
@@ -9,8 +10,8 @@ function readFile(input) {
       jsonFile = JSON.parse(reader.result);
       setData(jsonFile);
       console.log(jsonFile);
+      
     };
-  
   reader.onerror = function() {
      console.log(reader.error);
   };
@@ -19,24 +20,39 @@ function readFile(input) {
 //body  
 function setData({name,fields,references,buttons}){
   document.body.insertAdjacentHTML('afterend', `
-    <h1>${name}</h1>
-    <div class="data">${setFields(fields)}</div>
-    <div id = "references" >${setButtons(references)}</div>
+    <h1 id="name">${name}</h1>
+    <div id="fields">${setFields(fields)}</div>
+    <div id = "references" >${setReferences(references)}</div>
     <div id = "buttons" >${setButtons(buttons)}</div>
   `)
+  //проверка на наличие ключей 
+  if(name == undefined)
+      document.getElementById('name').remove();
+  if(fields == undefined)
+      document.getElementById('fields').remove();
   if(references == undefined)
       document.getElementById('references').remove();
   if(buttons == undefined)
       document.getElementById('buttons').remove();
+  
 }
 
-//field
+//fields
 function setFields(fields){
-  return fields.map(
+   let field =  fields.map(
     (elem) => `
-   <label>${elem.label}</label>  
+    ${setLabel(elem.label)}
   <input id = "inputStyle" type = ${elem.input.type} required = true ${setOtherInputParams(elem.input)}></input>
   `);
+        
+    return field;
+}
+
+function setLabel(label) {
+  if(label != undefined)
+    return `<label id="lableFields">${label}</label>  `;
+  else
+    return ``;
 }
 
 function setOtherInputParams(elem) {
@@ -53,6 +69,9 @@ function setOtherInputParams(elem) {
   if(elem.filetype != undefined){
      return `filetype = ${elem.filetype}`;
   }
+  if(elem.filetype != undefined){
+    return `filetype = ${elem.filetype}`;
+ }
 }
 
 //references
@@ -60,10 +79,18 @@ function setReferences(references) {
   if(references != undefined){
     return references.map(
       (elem) => `
-      <a href="${elem.ref}" class="controlBtn">${elem.text}</a>
+       ${setReferencesInput(elem.input)}
+       <a ref=${elem.ref}>${elem.text}</a>
       `);
-  }
-  
+  } 
+}
+
+function setReferencesInput(input) {
+  if(input != undefined)
+    return `<input id = "inputStyle" type = ${input.type} required = true ${setOtherInputParams(input)}></input>`;
+  else
+    return ``;
+ 
 }
 
 
@@ -72,7 +99,7 @@ function setButtons(buttons) {
   if(buttons != undefined){
     return buttons.map(
       (elem) => `
-      <a href="${elem.ref}" class="controlBtn">${elem.text}</a>
+      <a href="${elem.ref}" >${elem.text}</a>
       `);
   }
 }
