@@ -33,7 +33,40 @@ function setData({name,fields,references,buttons}){
       document.getElementById('references').remove();
   if(buttons == undefined)
       document.getElementById('buttons').remove();
-  
+
+  setTimeout(() => {alert();
+    // if(fields.input != undefined){
+      
+    //   if(fields.input.mask!= undefined){
+    //     $(".inputStyle").mask(`${fields.input.mask}`);
+        
+    //   }
+    // }
+    setMasks(fields);
+  }, 100);
+}
+
+function setMasks(fields) {
+  fields.map(function (elem) {
+    if(elem.input != undefined){
+        if(elem.input.mask!=undefined){
+          let id = elem.input.mask;
+          if(id.includes("+")){
+            id = id.replace(/[+]/, "");
+            id = id.replace(/[\])}[{(]/g, "");
+          }
+          console.log(`id=${id}`);
+          console.log(`mask=${elem.input.mask}`);
+          let element = $(`#${id}.inputStyle`).attr('id');
+          console.log(element);
+          // if($("#").attr('id') == id){
+          //   $("#id .inputStyle").mask(`${id}`);
+          // }
+          
+        }
+    
+    }
+  });
 }
 
 // //fields
@@ -41,10 +74,25 @@ function setFields(fields){
    let field =  fields.map(
     (elem) => `
     ${setLabel(elem.label)}
-    <input id = "inputStyle" type = ${elem.input.type} required = true ${setOtherInputParams(elem.input)}></input>
+    <input class = inputStyle type = ${setInputType(elem.input)} required = true ${setOtherInputParams(elem.input)}></input>
   `);
         
     return field;
+}
+
+function setInputType(input) {
+    if(input.mask != undefined){
+      let phoneMask = input.mask;
+      if(phoneMask.includes("+")){
+        phoneMask = phoneMask.replace(/[+]/, "");
+        phoneMask = phoneMask.replace(/[\])}[{(]/g, "");
+      }
+       
+      return `tel id = "${phoneMask}"`;
+    }
+    else{
+      return input.type;
+    }
 }
 
 function setLabel(label) {
@@ -55,10 +103,9 @@ function setLabel(label) {
 }
 
 function setOtherInputParams(elem) {
-  if(elem.mask != undefined){
-      // return `pattern = ${elem.mask}`;
-     $("#inputStyle").mask(`${elem.mask}`);
-  }
+  // if(elem.mask != undefined){
+    
+  // }
   if(elem.placeholder != undefined){
     return `placeholder = ${elem.placeholder}`;
   }
@@ -88,7 +135,7 @@ if(references!= undefined)
 
 function setReferencesInput(input) {
   if(input != undefined)
-    return `<input id = "inputStyle" type = ${input.type} required = true ${setOtherInputParams(input)}></input>`;
+    return `<input class = inputStyle type = ${input.type} required = true ${setOtherInputParams(input)}></input>`;
   else
     return ``;
 }
@@ -121,4 +168,7 @@ function setButtons(buttons) {
       `);
   }
 }
-  
+// $(document).ready(function(){
+//     let elem = $("#(s").attr('id');
+//     console.log(elem);
+// });
