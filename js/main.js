@@ -2,22 +2,21 @@
 function readFile(input) {
   let jsonFile;
   let file = input.files[0];
-  
   let reader = new FileReader();  
   reader.readAsText(file);
   
   reader.onload = function() {
+
       jsonFile = JSON.parse(reader.result);
       setData(jsonFile);
-      console.log(jsonFile);
-      
+      console.log(jsonFile);            
     };
   reader.onerror = function() {
      console.log(reader.error);
   };
 }
 
-//body  
+// //body  
 function setData({name,fields,references,buttons}){
   document.body.insertAdjacentHTML('afterend', `
     <h1 id="name">${name}</h1>
@@ -37,12 +36,12 @@ function setData({name,fields,references,buttons}){
   
 }
 
-//fields
+// //fields
 function setFields(fields){
    let field =  fields.map(
     (elem) => `
     ${setLabel(elem.label)}
-  <input id = "inputStyle" type = ${elem.input.type} required = true ${setOtherInputParams(elem.input)}></input>
+    <input id = "inputStyle" type = ${elem.input.type} required = true ${setOtherInputParams(elem.input)}></input>
   `);
         
     return field;
@@ -69,20 +68,22 @@ function setOtherInputParams(elem) {
   if(elem.filetype != undefined){
      return `filetype = ${elem.filetype}`;
   }
-  if(elem.filetype != undefined){
-    return `filetype = ${elem.filetype}`;
+  if(elem.checked != undefined){
+    return `checked = ${elem.checked}`;
  }
 }
 
-//references
+// // references
 function setReferences(references) {
-  if(references != undefined){
-    return references.map(
-      (elem) => `
-       ${setReferencesInput(elem.input)}
-       <a ref=${elem.ref}>${elem.text}</a>
-      `);
-  } 
+
+if(references!= undefined)
+{
+  return references.map(
+    (elem) => `
+     ${setReferencesInput(elem.input)}
+     ${setReferencesText(elem["text without ref"],elem.text,elem.ref)}     
+  `);
+}  
 }
 
 function setReferencesInput(input) {
@@ -90,7 +91,24 @@ function setReferencesInput(input) {
     return `<input id = "inputStyle" type = ${input.type} required = true ${setOtherInputParams(input)}></input>`;
   else
     return ``;
- 
+}
+
+function setReferencesText (textWith,text, ref) {
+if(textWith!= undefined && text != undefined && ref != undefined)
+  return `<a ref=${ref}>${text}</a>
+  <h>${textWith}</h>`;
+else
+  return ``;
+}
+
+
+function convertToString(text) {
+    if(text instanceof String){
+      console.log(text);
+      let ConvertedText = text.replace(/,/, "");
+      return ConvertedText;
+    }
+   
 }
 
 
