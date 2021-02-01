@@ -34,40 +34,39 @@ function setData({name,fields,references,buttons}){
   if(buttons == undefined)
       document.getElementById('buttons').remove();
 
-  setTimeout(() => {alert();
-    // if(fields.input != undefined){
+  // setTimeout(() => {alert();
+  //   // if(fields.input != undefined){
       
-    //   if(fields.input.mask!= undefined){
-    //     $(".inputStyle").mask(`${fields.input.mask}`);
+  //   //   if(fields.input.mask!= undefined){
+  //   //     $(".inputStyle").mask(`${fields.input.mask}`);
         
-    //   }
-    // }
-    setMasks(fields);
-  }, 100);
+  //   //   }
+  //   // }
+  //   setMasks(fields);
+  // }, 100);
 }
 
-function setMasks(fields) {
-  fields.map(function (elem) {
-    if(elem.input != undefined){
-        if(elem.input.mask!=undefined){
-          let id = elem.input.mask;
-          if(id.includes("+")){
-            id = id.replace(/[+]/, "");
-            id = id.replace(/[\])}[{(]/g, "");
-          }
-          console.log(`id=${id}`);
-          console.log(`mask=${elem.input.mask}`);
-          let element = $(`#${id}.inputStyle`).attr('id');
-          console.log(element);
-          // if($("#").attr('id') == id){
-          //   $("#id .inputStyle").mask(`${id}`);
-          // }
+// function setMasks(fields) {
+//   fields.map(function (elem) {
+//     if(elem.input != undefined){
+//         if(elem.input.mask!=undefined){
+//           let id = elem.input.mask;
+//           if(id.includes("+")){
+//             id = id.replace(/[+]/, "");
+//             id = id.replace(/[\])}[{(]/g, "");
+//           }
+//           console.log(`id=${id}`);
+//           // console.log(`mask=${elem.input.mask}`);
+//           let element = $(`#${id}`).attr('id');
+//           console.log(element);
+//           // if($("#").attr('id') == id){
+//           //   $("#id .inputStyle").mask(`${id}`);
+//           // }
           
-        }
-    
-    }
-  });
-}
+//         }
+//     }
+//   });
+// }
 
 // //fields
 function setFields(fields){
@@ -75,8 +74,7 @@ function setFields(fields){
     (elem) => `
     ${setLabel(elem.label)}
     <input class = inputStyle type = ${setInputType(elem.input)} required = true ${setOtherInputParams(elem.input)}></input>
-  `);
-        
+  `);      
     return field;
 }
 
@@ -86,43 +84,49 @@ function setInputType(input) {
       if(phoneMask.includes("+")){
         phoneMask = phoneMask.replace(/[+]/, "");
         phoneMask = phoneMask.replace(/[\])}[{(]/g, "");
-      }
-       
+      }      
       return `tel id = "${phoneMask}"`;
     }
     else{
       return input.type;
     }
+
 }
 
 function setLabel(label) {
   if(label != undefined)
+
     return `<label id="lableFields">${label}</label>  `;
   else
     return ``;
 }
 
-function setOtherInputParams(elem) {
-  // if(elem.mask != undefined){
-    
-  // }
-  if(elem.placeholder != undefined){
-    return `placeholder = ${elem.placeholder}`;
+function setOtherInputParams(input) {
+  if(input.placeholder != undefined){
+    let placeholderStr=JSON.stringify(input.placeholder);
+    return `placeholder = ${placeholderStr}`;
   }
-  if(elem.multiple != undefined){
-    return `multiple = ${elem.multiple}`;
+  if(input.multiple != undefined){
+    return `multiple = ${input.multiple}`;
   }
-  if(elem.filetype != undefined){
-     return `filetype = ${elem.filetype}`;
+  if(input.filetype != undefined){
+     return `filetype = ${input.filetype}`;
   }
-  if(elem.checked != undefined){
-    return `checked = ${elem.checked}`;
+  if(input.checked != undefined){
+    return `checked = ${input.checked}`;
  }
+ let inputStr=JSON.stringify(input);
+ inputStr = inputStr.replace(/[,]/, "");
+ input=JSON.parse(inputStr);
+
+}
+
+function setInputPlaceholder(placeholder) {
+  
 }
 
 // // references
 function setReferences(references) {
-
 if(references!= undefined)
 {
   return references.map(
@@ -142,8 +146,8 @@ function setReferencesInput(input) {
 
 function setReferencesText (textWith,text, ref) {
 if(textWith!= undefined && text != undefined && ref != undefined)
-  return `<a ref=${ref}>${text}</a>
-  <h>${textWith}</h>`;
+  return `<h>${textWith}</h>
+  <a ref=${ref}>${text}</a>`;
 else
   return ``;
 }
