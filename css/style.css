@@ -1,46 +1,64 @@
- 
- body
+body
 {
-
+    margin: 0;
+    background: 0;
+    font-family: 'Quicksand', sans-serif;
     width: 100%;
-
-    min-width: 1200px;
-   
+    max-width: 1200px;
+    margin: 0 auto;
 }
-.header
+*,
+*:before,
+*:after{
+    box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6 {
+margin: 0;
+}
+
+#header
 {
     margin: 0 auto;
     text-align: center;
     flex-direction: column;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 
 }
+#intro
+{
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* keys 
+===================*/
 #name
 {
     text-align: center;
     text-transform: uppercase;
     color: #FFAD40;
-    
+    margin-bottom: 35px;
 }
 #fields
 {
+    position: relative;
     margin: 0 auto;
-
     flex-direction: column;
     flex-wrap: wrap;
-    width: 100%;
-    max-width: 200px;
+    text-align: center;
 }
 #references
 {
+    position: relative; 
     margin: 0 auto;
-    text-align: center;
-    margin-top: 10px;
-
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 200px;
+    justify-content: center;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 #buttons
 {
@@ -48,24 +66,52 @@
     text-align: center;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 100%;
-    max-width: 200px;
-    margin-top: 10px;
 }
 
-label
-{
-    
 
-    font-size: 20px;
-    padding-bottom: 25px ;
-}
-input
+/* fields
+============== */
+#fieldsBlock
 {
 margin-bottom: 10px;
-height: 25px;
+text-align: center;
+
+}
+#labelFields
+{
+    display: inline-block;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    font-size: 30px;
+    width: 80%;
+}
+#inputFields
+{
+    display: inline-block;
+    width: 80%;
+    height: 40px;
+    font-size: 15px;
+}
+#selectFields
+{
+    margin-bottom: 10px;
+    width: 80%;
+    height: 60px;
+    text-align: center;
 }
 
+/* references
+=========== */
+#referencesBlock
+{
+    margin-bottom: 10px;
+
+
+}
+#inputReferences
+{
+    
+}
 a
 {
     text-decoration: none;
@@ -87,43 +133,55 @@ a
     
 }
 
+
+/* media
+=============== */
 @media (max-width: 767.98px) { 
        
-    body
+    .body
     {
         width: 100%;
-        max-width: 767.98px;
     }
-    .header
+    #intro
     {
         width: 100%;
-        max-width: 767.98px;
     }
+    #inputFields
+    {   
+    width: 80%;
+    }  
+    
 }
 
 @media (max-width: 575.98px) { 
        
-    body
+   .body
     {
         width: 100%;
-        max-width: 575.98px;
     }
-    .header
+    #intro
     {
         width: 100%;
-        max-width: 767.98px;
     }
+    #inputFields
+    {   
+    width: 80%;
+    }  
+    
 }
 @media (max-width: 975.98px) { 
        
-    body
+    .body
     {
         width: 100%;
-        max-width: 975.98px;
     }
-    .header
+    #intro
     {
         width: 100%;
-        max-width: 767.98px;
     }
-} 
+    #inputFields
+    {   
+    width: 80%;
+    }      
+    
+}
