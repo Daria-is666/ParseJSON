@@ -1,6 +1,9 @@
 //загрузка
 
+let count;
+
 function readFile(input) {
+  count = 1;
   let jsonFile;
   let file = input.files[0];
   let reader = new FileReader();  
@@ -18,7 +21,7 @@ function readFile(input) {
   };
 }
 
-// //body  
+//body  
 function setData({name,fields,references,buttons}){
   document.body.insertAdjacentHTML('afterend', `
   <div id="intro">
@@ -38,67 +41,35 @@ function setData({name,fields,references,buttons}){
   if(buttons == undefined)
       document.getElementById('buttons').remove();
 
-  setTimeout(() => {alert();
-    // if(fields.input != undefined){
-      
-    //   if(fields.input.mask!= undefined){
-    //     $(".inputStyle").mask(`${fields.input.mask}`);
-        
-    //   }
-    // }
+  setTimeout(() => {
+    count = 1;
     setMasks(fields);
   }, 100);
 }
 
+// masked
 function setMasks(fields) {
   fields.map(function (elem) {
-    if(elem.input != undefined){
-        if(elem.input.mask!=undefined){
-          let id = elem.input.mask;
-          if(id.includes("+")){
-            id = id.replace(/[+]/, "");
-            id = id.replace(/[\])}[{(]/g, "");
-          }
-          console.log(`id=${id}`);
-          // console.log(`mask=${elem.input.mask}`);
-          let element = $(`#${id}`).attr('id');
-          console.log(element);
-          // if($("#").attr('id') == id){
-          //   $("#id .inputStyle").mask(`${id}`);
-          // }
-          
-        }
+    if(elem.input != undefined && elem.input.mask!=undefined){
+      if($(`#${count}`).attr('id') == count){
+          $(`#${count}`).mask(`${elem.input.mask}`);
+          count++;
+      }          
     }
   });
 }
 
 //fields
 function setFields(fields){
-  // let inputString = JSON.stringify(fields.input);
-  // inputString = inputString.replace(/,/g, "");
-
    let field =  fields.map(
     (elem) => `--><div id = "fieldsBlock">
     ${setLabel(elem.label)}
     ${setInput(elem.input)} </div><!--
     
   `);      
-    return field;
-    
+    return field; 
 }
 
-// function setDataFields(fields) {
-//   for (var i in fields) {
-//   var output = "<h1>Исполнители</h1>";
-//    output += "<ul>";
-//   for (var j in fields[i].input) {
-//     // console.log(fields.input);
-//     output +=  `<input id = "inputStyle" type = ${setInputType(fields[i].input[j])} required = true placeholder=${fields[i].input[j].placeholderStr} ${setOtherInputParams(fields[i].input[j])}></input>`
-//   }
-// }
-//   output += "<ul>";
-//   document.getElementById("inputList").innerHTML=output;  
-// }
 // label
 function setLabel(label) {
   if(label != undefined)
@@ -111,7 +82,7 @@ function setLabel(label) {
 function setInput(input) {
   if(input.type != "technology")
   {
-    return `<input id = "inputFields" type = ${setInputType(input)} required = true ${setOtherInputParams(input)}></input>`
+    return `<input class=inputFields type = ${setInputType(input)} required = true ${setOtherInputParams(input)}></input>`
     
   }
   if(input.type == "technology")
@@ -121,6 +92,7 @@ function setInput(input) {
     </select></p>`;
   }  
 }
+// select
 function setTechnologyParam(technologies) {
   let options;
   for (let i = 0; i < technologies.length; i++) {
@@ -131,12 +103,9 @@ function setTechnologyParam(technologies) {
 }
 function setInputType(input) {
     if(input.mask != undefined){
-      let phoneMask = input.mask;
-      if(phoneMask.includes("+")){
-        phoneMask = phoneMask.replace(/[+]/, "");
-        phoneMask = phoneMask.replace(/[\])}[{(]/g, "");
-      }      
-      return `tel id = "${phoneMask}"`;
+      let inputId = `tel id = "${count}"`;
+      count++;
+      return inputId;
     }
     else{
       return input.type;
@@ -158,7 +127,6 @@ function setOtherInputParams(input) {
     return `checked = ${input.checked}`;
  }
 }
-// select
 
 
 // references
@@ -187,7 +155,6 @@ if(textWith!= undefined && text != undefined && ref != undefined)
 else
   return ``;
 }
-
 function convertToString(text) {
     if(text instanceof String){
       console.log(text);
@@ -206,7 +173,4 @@ function setButtons(buttons) {
       `);
   }
 }
-// $(document).ready(function(){
-//     let elem = $("#(s").attr('id');
-//     console.log(elem);
-// });
+
