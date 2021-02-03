@@ -1,7 +1,7 @@
 body
 {
     margin: 0;
-    background: 0;
+    background: #6b9da8;
     font-family: 'Quicksand', sans-serif;
     width: 100%;
     max-width: 1200px;
@@ -20,17 +20,28 @@ margin: 0;
 #header
 {
     margin: 0 auto;
+    margin-top: 15px;
     text-align: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
+}
+input[type="file"]{
+    display: none;
+}
+.custom-file-upload {
+    cursor: pointer;
 }
 #intro
 {
+    background: #ffffff;
     width: 100%;
-    max-width: 650px;
+    max-width: 750px;
+    border-radius: 15px;
     margin: 0 auto;
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    box-shadow: 0 0 105px rgba(238, 249, 255, 0.25);
 }
 
 /* keys 
@@ -39,12 +50,12 @@ margin: 0;
 {
     text-align: center;
     text-transform: uppercase;
-    color: #FFAD40;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
+    word-wrap: break-word;
+    color: #2B889E;
 }
 #fields
 {
-    position: relative;
     margin: 0 auto;
     flex-direction: column;
     flex-wrap: wrap;
@@ -52,10 +63,11 @@ margin: 0;
 }
 #references
 {
-    position: relative; 
     margin: 0 auto;
-    justify-content: center;
-    vertical-align: middle;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 320px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -63,8 +75,10 @@ margin: 0;
 #buttons
 {
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
     text-align: center;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 
@@ -75,67 +89,143 @@ margin: 0;
 {
 margin-bottom: 10px;
 text-align: center;
-
+margin: 0 auto;
+margin-bottom: 15px;
 }
 #labelFields
 {
-    display: inline-block;
-    margin-bottom: 10px;
     margin: 0 auto;
-    font-size: 30px;
+    color: #0E5667;
+    font-size: 35px;
+    padding: 0 80px 0 80px;
+    padding-left: 20px;
+    opacity: 5;
     width: 80%;
 }
 .inputFields
 {
+
     display: inline-block;
     width: 80%;
-    height: 40px;
-    font-size: 15px;
+    height: 50px;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 10px;
+    border-radius: 15px;
+    background-color: #c2ced1;
+    border: 3px solid  #aac7ce;        
+}
+.inputFields::-webkit-input-placeholder {
+    color: #2B889E;
+    font-family: 'Quicksand', sans-serif;
 }
 #selectFields
 {
+    color: #0E5667;
+    font-size: 20px;
+    background-color: #c2ced1;
+    border: 3px solid  #aac7ce;
     margin-bottom: 10px;
     width: 80%;
     height: 60px;
     text-align: center;
+    border-radius: 15px;
 }
+
 
 /* references
 =========== */
 #referencesBlock
 {
-    margin-bottom: 10px;
-
-
+    margin: 0 auto;
 }
 #inputReferences
 {
-    
+    text-align: center;
 }
-a
+#textWithRef
 {
+    font-size: 20px;
+    color: #0E5667;
+}
+#linkReferences
+{
+    position: relative;
+    color:#2B889E; 
+	cursor: pointer;
+	line-height: 1; 
+    font-size: 20px;
+    text-decoration: none;
+    margin-bottom: 10px; 
+    margin-left: 7px; 
+
+}
+#linkReferences:after
+{
+    display: block;
+	position: absolute;
+	right: 0; 
+	width: 0;
+	height: 2px; 
+	background-color: #2B889E; 
+	content: "";
+	transition: width 0.3s ease-out; 
+}
+#linkReferences:hover:after,
+#linkReferences:focus:after {
+	width: 100%; 
+}
+
+/* button
+========= */
+#buttonBlock
+{
+    margin-left: 10px;
+}
+#linkButton
+{
+    font-size: 25px;
     text-decoration: none;
     display: inline-block;
-    color:black;
+    color: #2B889E;
+    border: 2px solid#2B889E;
     text-decoration: none;
     padding: 6px 25px;
     margin-bottom: 10px;
-    background-color: #8e918d;   
-
-    transition: color .5s linear;
+    background-color:transparent; 
+    transition:  .2s linear;
+    opacity: 0.75;
 }
-
-
-.controlBtn
+#linkButton:hover
 {
-    text-decoration: none;
-    
-    
+    font-size: 28px;
+    opacity: 1;
 }
+
 
 
 /* media
 =============== */
+@media (max-width: 575.98px) { 
+       
+    .body
+     {
+         width: 100%;
+     }
+     #intro
+     {
+         width: 100%;
+     }
+     #inputFields
+     {   
+     width: 80%;
+     } 
+     #name
+     {
+        font-size: 30px;
+     } 
+     
+ }
 @media (max-width: 767.98px) { 
        
     .body
@@ -150,25 +240,15 @@ a
     {   
     width: 80%;
     }  
+    #labelFields
+    {
+    padding: 0;
+    }     
+    
     
 }
 
-@media (max-width: 575.98px) { 
-       
-   .body
-    {
-        width: 100%;
-    }
-    #intro
-    {
-        width: 100%;
-    }
-    #inputFields
-    {   
-    width: 80%;
-    }  
-    
-}
+
 @media (max-width: 975.98px) { 
        
     .body
@@ -182,6 +262,6 @@ a
     #inputFields
     {   
     width: 80%;
-    }      
+    } 
     
 }

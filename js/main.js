@@ -64,7 +64,8 @@ function setFields(fields){
    let field =  fields.map(
     (elem) => `--><div id = "fieldsBlock">
     ${setLabel(elem.label)}
-    ${setInput(elem.input)} </div><!--
+    ${setInput(elem.input)}
+    ${inputStyle(elem.input)} </div><!--
     
   `);      
     return field; 
@@ -79,12 +80,23 @@ function setLabel(label) {
     return ``;
 }
 // input
+function inputStyle(input) {
+  if(input.type == "file")
+  {
+    return `<label class = "custom-file-upload" >
+     <input class=inputFields type = ${setInputType(input)} required = true ${setOtherInputParams(input)}></input>
+     <img src="./image/upload.png" weight="35px" height="35px" alt="загрузка" hspace= "5"></label>`;
+  }
+  else
+    return ``;
+}
 function setInput(input) {
   if(input.type != "technology")
   {
-    return `<input class=inputFields type = ${setInputType(input)} required = true ${setOtherInputParams(input)}></input>`
+    return `<input class=inputFields type = ${setInputType(input)} required = true ${setOtherInputParams(input)}></input>`;
     
   }
+ 
   if(input.type == "technology")
   {
     return `<p><select multiple id = "selectFields">
