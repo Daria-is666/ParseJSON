@@ -25,6 +25,18 @@ margin: 0;
     margin-bottom: 30px;
 
 }
+.buttonApdate
+{
+    margin-top: 10px;
+    margin-left: 5px;
+    border: none;
+    background: #f7c86ba8;
+    padding: 10px 15px 10px 15px;
+    font-size: 20px;
+    color: #0E5667;
+    border-radius: 15px;
+}
+
 input[type="file"]{
     display: none;
 }
